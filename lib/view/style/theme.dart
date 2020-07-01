@@ -11,4 +11,6 @@ class Themes {
   static const backgroundB = Color(0xFF1D1B20);
   // 边框颜色
   static const border = Color(0xFF6E5A3E);
+  // 红色
+  static const red = Color(0xFFC74444);
 }
