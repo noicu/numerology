@@ -47,13 +47,11 @@ class _HallPageState extends State<HallPage> {
             child: ListView.separated(
               physics: BouncingScrollPhysics(),
               itemCount: news.length,
-              separatorBuilder: (c, i) => i > 0
-                  ? Divider(
+              separatorBuilder: (c, i) => Divider(
                       height: 10,
                       thickness: 10,
                       color: Themes.backgroundH,
-                    )
-                  : SizedBox(),
+                    ),
               itemBuilder: (c, i) => news[i],
             ),
           ),

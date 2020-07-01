@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:numerology/view/style/theme.dart';
 import 'package:numerology/view/widgets/chassis.dart';
@@ -80,6 +82,7 @@ class _HallModCState extends State<HallModC> {
 
   @override
   Widget build(BuildContext context) {
+    inspect(this);
     return Chassis(
       leading: Text(
         '热门功能',
