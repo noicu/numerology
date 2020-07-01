@@ -1,4 +1,4 @@
-library flutter_custom_calendar;
+library custom_calendar;
 
 export 'package:numerology/view/widgets/calendar/controller.dart';
 export 'package:numerology/view/widgets/calendar/widget/calendar_view.dart';
