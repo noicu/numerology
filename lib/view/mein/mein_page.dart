@@ -1,9 +1,14 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+// import 'package:numerology/utils/solar_util.dart';
+// import 'package:numerology/utils/lunar_util.dart';
 import 'package:numerology/view/style/theme.dart';
 import 'package:numerology/view/widgets/calendar/custom_calendar.dart';
+import 'package:numerology/view/widgets/calendar/utils/lunar_util.dart';
+import 'package:numerology/view/widgets/chassis.dart';
 import 'package:numerology/view/widgets/search_app_bar.dart';
+// import 'package:numerology/utils/lunar_util.dart';
 
 class MeinPage extends StatefulWidget {
   MeinPage({Key key}) : super(key: key);
@@ -14,7 +19,7 @@ class MeinPage extends StatefulWidget {
 
 class _MeinPageState extends State<MeinPage> {
   ValueNotifier<String> text;
-  ValueNotifier<String> selectText;
+  ValueNotifier<DateModel> selectText;
 
   CalendarController controller;
 
@@ -27,6 +32,7 @@ class _MeinPageState extends State<MeinPage> {
       // minYearMonth: now.month - 2,
       // maxYear: now.year,
       // maxYearMonth: now.month + 1,
+      selectDateModel: DateModel.fromDateTime(DateTime.now()),
       showMode: CalendarConstants.MODE_SHOW_MONTH_AND_WEEK,
     );
 
@@ -38,48 +44,49 @@ class _MeinPageState extends State<MeinPage> {
 
     controller.addOnCalendarSelectListener((dateModel) {
       //刷新选择的时间
-      selectText.value =
-          "单选模式\n选中的时间:\n${controller.getSingleSelectCalendar()}";
+      selectText.value = dateModel;
     });
 
     text = new ValueNotifier("${DateTime.now().year}年${DateTime.now().month}月");
 
-    selectText = new ValueNotifier(
-        "单选模式\n选中的时间:\n${controller.getSingleSelectCalendar()}");
+    selectText = new ValueNotifier(DateModel.fromDateTime(DateTime.now()));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SearchAppBarWidget(
+      appBar: AppBar(
+        // leading: Text('sd'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.navigate_before),
+              onPressed: () {
+                controller.previousPage();
+              },
+            ),
+            ValueListenableBuilder(
+              valueListenable: text,
+              builder: (context, value, child) {
+                return Text(text.value);
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.navigate_next),
+              onPressed: () {
+                controller.nextPage();
+              },
+            ),
+          ],
+        ),
         backgroundColor: Themes.backgroundH,
-        color: Themes.mainText,
       ),
       backgroundColor: Themes.backgroundB,
       body: ListView(
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.navigate_before),
-                onPressed: () {
-                  controller.previousPage();
-                },
-              ),
-              ValueListenableBuilder(
-                valueListenable: text,
-                builder: (context, value, child) {
-                  return Text(text.value);
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.navigate_next),
-                onPressed: () {
-                  controller.nextPage();
-                },
-              ),
-            ],
+          SizedBox(
+            height: 10,
           ),
           CalendarViewWidget(
             calendarController: controller,
@@ -93,7 +100,31 @@ class _MeinPageState extends State<MeinPage> {
           ValueListenableBuilder(
             valueListenable: selectText,
             builder: (context, value, child) {
-              return Text(selectText.value);
+              print(value);
+              return Chassis(
+                leading: Text(
+                  '${LunarUtil.numToChineseMonth(selectText.value.lunar[1], selectText.value.lunar[3])}${LunarUtil.numToChinese(selectText.value.lunar[1], selectText.value.lunar[2], selectText.value.lunar[3])}',
+                  style: TextStyle(color: Themes.mainText),
+                ),
+                suffix: Text(
+                  '择吉',
+                  style: TextStyle(color: Themes.mainText),
+                ),
+                child: Container(
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        '${LunarUtil.numToChineseMonth(selectText.value.lunar[1], selectText.value.lunar[3])}${LunarUtil.numToChinese(selectText.value.lunar[1], selectText.value.lunar[2], selectText.value.lunar[3])}',
+                        style: TextStyle(color: Themes.mainText),
+                      ),
+                      Text(
+                        '${LunarUtil.numToChineseMonth(selectText.value.lunar[1], selectText.value.lunar[3])}${LunarUtil.numToChinese(selectText.value.lunar[1], selectText.value.lunar[2], selectText.value.lunar[3])}',
+                        style: TextStyle(color: Themes.mainText),
+                      ),
+                    ],
+                  ),
+                ),
+              );
             },
           ),
         ],
@@ -103,7 +134,7 @@ class _MeinPageState extends State<MeinPage> {
 }
 
 class CustomStyleWeekBarItem extends BaseWeekBar {
-  final List<String> weekList = ["一", "二", "三", "四", "五", "六", "日"];
+  final List<String> weekList = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
 
   @override
   Widget getWeekBarItem(int index) {
@@ -133,13 +164,9 @@ class CustomStyleDayWidget extends BaseCustomDayWidget {
 
   @override
   void drawNormal(DateModel dateModel, Canvas canvas, Size size) {
-    if (!dateModel.isCurrentMonth) {
-      return;
-    }
+    if (!dateModel.isCurrentMonth) return;
     bool isWeekend = dateModel.isWeekend;
     bool isInRange = dateModel.isInRange;
-
-    // print(isInRange);
 
     //顶部的文字
     TextPainter dayTextPainter = new TextPainter()
@@ -180,69 +207,109 @@ class CustomStyleDayWidget extends BaseCustomDayWidget {
     if (!dateModel.isCurrentMonth) {
       return;
     }
-    const PI = 3.1415926;
+    // print(SolarUtil.getWeeksOfMonth(2020,7,1));
+    // print(LunarUtils.YI_JI[0]);
+    // print(LunarUtils.hex(9));
+    print("hellohttps://tool.lu/".codeUnitAt(0));
     //绘制背景
+    var width = size.width;
+    var height = size.height;
+    var bw = size.width - 5; // 背景宽度
+    var bh = size.height - 5; // 背景高度
+    double elevation = 10;
+    const PI = 3.1415926;
+    const ANGLE = PI / 180 * (65); //调整旋转度数
+    var center = Offset(width / 2, height / 2);
 
-    canvas.rotate(0);
+    var c1 = Offset(
+      center.dx - (bw / 4 * cos(ANGLE)),
+      center.dy - (bh / 4 * sin(ANGLE)),
+    );
+    var c2 = Offset(
+      center.dx - (bw / 4 * cos(ANGLE + PI)),
+      center.dy - (bh / 4 * sin(ANGLE + PI)),
+    );
 
-    /// 根据椭圆半径a和b，求一个角度theta对应弧上点的位置(x,y)
-    /// y=b*sin(theta)
-    /// x=a*cos(theta)
+    var c1c = Paint()
+      ..color = Color(0xFF473D44)
+      ..style = PaintingStyle.fill;
+    var c2c = Paint()
+      ..color = Color(0xFFC5B8C2)
+      ..style = PaintingStyle.fill;
 
-    print(size.width);
-    print(size.height);
+    Path path = Path()
+      ..addArc(
+        Rect.fromCenter(
+          center: center,
+          width: bw,
+          height: bh,
+        ).translate(0, 0 - elevation),
+        0,
+        2 * PI,
+      );
+    canvas.drawShadow(path, Color(0xFFB8818F), elevation, true);
 
-    print((size.height / 2) * sin(2 * PI / 8));
-    print((size.width / 2) * cos(2 * PI / 8));
-
+    // 阴大半圆
     canvas.drawArc(
-      Rect.fromPoints(Offset(5, 5), Offset(size.width - 5, size.height - 5)),
-      1,
-      PI,
-      true,
-      Paint()
-        ..color = Colors.black
-        ..style = PaintingStyle.fill,
+      Rect.fromCenter(
+        center: center,
+        width: bw,
+        height: bh,
+      ),
+      ANGLE, // 起始角度
+      PI, // 扇面
+      true, // 居中
+      c1c,
     );
-
+    // 阳大半圆
     canvas.drawArc(
-      Rect.fromPoints(Offset(5, 5), Offset(size.width - 5, size.height - 5)),
-      PI + 1,
-      PI,
-      true,
-      Paint()
-        ..color = Colors.red
-        ..style = PaintingStyle.fill,
+      Rect.fromCenter(
+        center: center,
+        width: bw,
+        height: bh,
+      ),
+      PI + ANGLE, // 起始角度
+      PI, // 扇面
+      true, // 居中
+      c2c,
     );
 
-    canvas.drawCircle(
-      Offset(size.width / 4 + 2.5, size.height / 2),
-      size.width / 4 - 2.5,
-      Paint()
-        ..color = Colors.red
-        ..strokeWidth = 2,
-    );
-    canvas.drawCircle(
-      Offset(size.width - size.width / 4 - 2.5 - PI * 0.5,
-          size.height / 2 + PI * 1),
-      size.width / 4 - 2.5,
-      Paint()
-        ..color = Colors.black
-        ..strokeWidth = 2,
+    // 阳小半圆
+    canvas.drawArc(
+      Rect.fromCenter(
+        center: c1,
+        width: bw / 2,
+        height: bh / 2,
+      ),
+      0, // 起始角度
+      2 * PI, // 扇���
+      true, // 居中
+      c2c,
     );
 
-    canvas.restore();
-    canvas.save();
+    // 阴小半圆
+    canvas.drawArc(
+      Rect.fromCenter(
+        center: c2,
+        width: bw / 2,
+        height: bh / 2,
+      ),
+      0, // 起始角度
+      2 * PI, // 扇面
+      true, // 居中
+      c1c,
+    );
+
     //顶部的文字
     TextPainter dayTextPainter = new TextPainter()
       ..text = TextSpan(
           text: dateModel.day.toString(),
-          style: new TextStyle(color: Colors.white, fontSize: 16))
+          style: new TextStyle(color: Colors.black, fontSize: 20))
       ..textDirection = TextDirection.ltr
       ..textAlign = TextAlign.center;
 
-    dayTextPainter.layout(minWidth: size.width, maxWidth: size.width);
-    dayTextPainter.paint(canvas, Offset(0, 10));
+    dayTextPainter.layout(minWidth: width, maxWidth: width);
+    dayTextPainter.paint(canvas, Offset(0, height / 4 - 20 / 2));
 
     //下面的文字
     TextPainter lunarTextPainter = new TextPainter()
@@ -252,7 +319,88 @@ class CustomStyleDayWidget extends BaseCustomDayWidget {
       ..textDirection = TextDirection.ltr
       ..textAlign = TextAlign.center;
 
-    lunarTextPainter.layout(minWidth: size.width, maxWidth: size.width);
-    lunarTextPainter.paint(canvas, Offset(0, size.height / 2));
+    lunarTextPainter.layout(minWidth: width, maxWidth: width);
+    lunarTextPainter.paint(
+        canvas, Offset(0, (height - height / 4) - height / 6));
   }
 }
+
+/// ----------------------------------------------
+// for (var i = 0; i < 20; i++) {
+//   canvas.drawArc(
+//     Rect.fromCenter(
+//       center: Offset(
+//         width / 2 - (width / 4 * cos(PI / 10 * i)),
+//         height / 2 - (height / 4 * sin(PI / 10 * i)),
+//       ),
+//       width: 5,
+//       height: 5,
+//     ),
+//     0, // 起始角度 0度
+//     2 * PI, // 扇面 180度
+//     true, // 居中
+//     Paint()
+//       ..color = Colors.black
+//       ..style = PaintingStyle.fill,
+//   );
+
+//   canvas.drawArc(
+//     Rect.fromCenter(
+//       center: Offset(
+//         width / 2 - (width / 4 * cos(PI / 10 * i)),
+//         width / 2 - (height / 4 * sin(PI / 10 * i)),
+//       ),
+//       width: 5,
+//       height: 5,
+//     ),
+//     0, // 起始角度 0度
+//     2 * PI, // 扇�� 180度
+//     true, // 居中
+//     Paint()
+//       ..color = Colors.black
+//       ..style = PaintingStyle.fill,
+//   );
+// }
+
+// 中心点
+// canvas.drawArc(
+//   Rect.fromCenter(
+//     center: center,
+//     width: 5,
+//     height: 5,
+//   ),
+//   0, // 起始角度 0度
+//   2 * PI, // 扇面 180度
+//   true, // 居中
+//   Paint()
+//     ..color = Colors.black
+//     ..style = PaintingStyle.fill,
+// );
+
+// canvas.drawArc(
+//   Rect.fromCenter(
+//     center: c1,
+//     width: 5,
+//     height: 5,
+//   ),
+//   0, // 起始角度 0度
+//   2 * PI, // 扇面 180度
+//   true, // 居中
+//   Paint()
+//     ..color = Colors.black
+//     ..style = PaintingStyle.fill,
+// );
+
+// canvas.drawArc(
+//   Rect.fromCenter(
+//     center: c2,
+//     width: 5,
+//     height: 5,
+//   ),
+//   0, // 起始角度 0度
+//   2 * PI, // 扇面 180度
+//   true, // 居中
+//   Paint()
+//     ..color = Colors.black
+//     ..style = PaintingStyle.fill,
+// );
