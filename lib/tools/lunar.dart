@@ -596,6 +596,7 @@ class Lunar {
     int d = solar.getDay();
     int startYear, startMonth, startDay;
     int lunarYear, lunarMonth, lunarDay;
+    print(y < 2000);
     if (y < 2000) {
       startYear = SolarUtil.BASE_YEAR;
       startMonth = SolarUtil.BASE_MONTH;
@@ -614,9 +615,7 @@ class Lunar {
     int diff = 0;
     for (int i = startYear; i < y; i++) {
       diff += 365;
-      if (SolarUtil.isLeapYear(i)) {
-        diff += 1;
-      }
+      if (SolarUtil.isLeapYear(i)) diff += 1;
     }
     for (int i = startMonth; i < m; i++) {
       diff += SolarUtil.getDaysOfMonth(y, i);
@@ -631,7 +630,10 @@ class Lunar {
         lunarYear++;
       }
       lastDate = LunarUtil.getDaysOfMonth(lunarYear, lunarMonth);
+      // if (lunarDay == 1078) print('$lunarYear, $lunarMonth');
+      // print('$lunarDay---$lastDate:$lunarYear, $lunarMonth');
     }
+    print(lunarDay);
     year = lunarYear;
     month = lunarMonth;
     day = lunarDay;
@@ -694,12 +696,14 @@ class Lunar {
   void computeJieQi() {
     //儒略日，冬至在阳历上一年，所以这里多减1年以从去年开始
     double jd = 365.2422 * (solar.getYear() - 2001);
+    print(jd);
     for (int i = 0, j = JIE_QI.length; i < j; i++) {
-      double t = calJieQi(jd + i * 15.2, (i * 15 - 90.toDouble())) +
+      double t = calJieQi(jd + i * 15.2, (i * 15 - 90).toDouble()) +
           Solar.J2000 +
-          0x8D / 24;
+          8 / 24;
       jieQi[JIE_QI[i]] = Solar.fromJulianDay(t);
     }
+    print(jieQi);
   }
 
   /// 计算干支纪年
@@ -778,6 +782,7 @@ class Lunar {
 
     monthGanIndex = (index + gOffset) % 10;
     monthZhiIndex = (index + LunarUtil.BASE_MONTH_ZHI_INDEX) % 12;
+    print(end);
 
     //序号：大雪到小寒之间-2，小寒到立春之间-1，立春之后0
     int indexExact = -2;
@@ -786,6 +791,7 @@ class Lunar {
       String time = solar.toYmdHms();
       String stime = null == start ? time : start.toYmdHms();
       String etime = end.toYmdHms();
+      print('${start}---${stime},${etime}');
       if (time.compareTo(stime) >= 0 && time.compareTo(etime) < 0) {
         break;
       }
@@ -797,6 +803,7 @@ class Lunar {
     }
     monthGanIndexExact = (indexExact + gOffsetExact) % 10;
     monthZhiIndexExact = (indexExact + LunarUtil.BASE_MONTH_ZHI_INDEX) % 12;
+    print('$indexExact,$indexExact');
   }
 
   /**
@@ -1000,8 +1007,8 @@ class Lunar {
   }
 
   /**
-   * 获取干支纪月（月柱）（以节交接当天起算）
-   * <p>月天干口诀：甲己丙寅首，乙庚戊寅头。丙辛从庚寅，丁壬壬寅求，戊癸甲寅居，周而复始流。</p>
+   * 获��干支纪月（月柱）（以节交接当天起算）
+   * <p>月天干口诀：甲己丙寅首，乙���戊寅头。丙辛从庚寅，丁壬壬寅求，戊癸甲寅居，周而复��流。</p>
    * <p>月地支：正月起寅</p>
    *
    * @return 干支纪月（月柱），如己卯
@@ -1034,6 +1041,7 @@ class Lunar {
    * @return 月天干，如己
    */
   String getMonthGanExact() {
+    print("$monthGanIndexExact");
     return LunarUtil.GAN[monthGanIndexExact + 1];
   }
 
@@ -1261,13 +1269,13 @@ class Lunar {
     double t1 = t / 365250;
     List<double> r = [];
     double t2 = t1 * t1, t3 = t2 * t1, t4 = t3 * t1, t5 = t4 * t1;
-    r[0] = mrad(enn(E10, t1) +
+    r.add(mrad(enn(E10, t1) +
         enn(E11, t1) * t1 +
         enn(E12, t1) * t2 +
         enn(E13, t1) * t3 +
         enn(E14, t1) * t4 +
-        enn(E15, t1) * t5);
-    r[1] = enn(E20, t1) + enn(E21, t1) * t1;
+        enn(E15, t1) * t5));
+    r.add(enn(E20, t1) + enn(E21, t1) * t1);
     return r;
   }
 
@@ -1700,7 +1708,7 @@ class Lunar {
     return l;
   }
 
-  /// 获取八字五行
+  /// 获取八���五行
   /// @return 八字五行
   List<String> getBaZiWuXing() {
     List<String> baZi = getBaZi();
@@ -1826,6 +1834,7 @@ class Lunar {
   /// 获取每日宜，如果没有，返回["无"]
   /// @return 宜
   List<String> getDayYi() {
+    print('${getMonthInGanZhiExact()}, ${getDayInGanZhi()}');
     return LunarUtil.getDayYi(getMonthInGanZhiExact(), getDayInGanZhi());
   }
 

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:numerology/tools/lunar.dart';
 // import 'package:numerology/utils/solar_util.dart';
 // import 'package:numerology/utils/lunar_util.dart';
 import 'package:numerology/view/style/theme.dart';
@@ -202,6 +203,10 @@ class CustomStyleDayWidget extends BaseCustomDayWidget {
     lunarTextPainter.paint(canvas, Offset(0, size.height / 2));
   }
 
+  pr(String name, dynamic obj) {
+    print('$name------$obj');
+  }
+
   @override
   void drawSelected(DateModel dateModel, Canvas canvas, Size size) {
     if (!dateModel.isCurrentMonth) {
@@ -210,7 +215,38 @@ class CustomStyleDayWidget extends BaseCustomDayWidget {
     // print(SolarUtil.getWeeksOfMonth(2020,7,1));
     // print(LunarUtils.YI_JI[0]);
     // print(LunarUtils.hex(9));
-    print("hellohttps://tool.lu/".codeUnitAt(0));
+    Lunar d = Lunar(DateTime.now());
+    // pr('sad', d);
+    pr('公历', '${d.getSolar()}');
+    pr('农历',
+        '${d.getYearInChinese()}-${d.getMonthInChinese()}-${d.getDayInChinese()}');
+    pr('吉神宜趋', d.getDayJiShen());
+    pr('凶煞宜忌', d.getDayXiongSha());
+
+    pr('宜', d.getDayYi());
+    // pr('忌', d.getDayJi());
+    // pr('节日', d.getFestivals());
+    // pr('非正式节日', d.getOtherFestivals());
+    // pr('干支纪年', d.getYearInGanZhi());
+    // pr('阴历年的天干', d.getYearGan());
+    // pr('阴历年的地支', d.getYearZhi());
+    // pr('干支纪月', d.getMonthInGanZhi());
+    // pr('阴历月的天干', d.getMonthGan());
+    // pr('阴历月的天干', d.getMonthZhi());
+    // pr('阴历月的天干', d.getDayGan());
+    // pr('阴历月的天干', d.getDayZhi());
+    // pr('阴历月的天干', d.getYearInGanZhiByLiChun());
+    // pr('阴历月的天干', d.getYearGanByLiChun());
+    // pr('阴历月的天干', d.getYearZhiByLiChun());
+    // pr('阴历月的天干', d.getYearInGanZhiExact());
+    // pr('阴历月的天干', d.getYearGanExact());
+    // pr('阴历月的天干', d.getYearZhiExact());
+    // pr('阴历月的天干', d.getMonthInGanZhiExact());
+    // pr('阴历月的天干', d.getMonthGanExact());
+    // pr('阴历月的天干', d.getDayInGanZhiExact());
+    // pr('阴历月的天干', d.getDayGanExact());
+    // pr('阴历月的天干', d.getDayZhiExact());
+    // pr('阴历月的天干', d.getMonthGanExact());
     //绘制背景
     var width = size.width;
     var height = size.height;

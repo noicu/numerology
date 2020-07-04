@@ -50,7 +50,7 @@ class Solar {
    */
   Solar.fromYmdHms(
       int year, int month, int day, int hour, int minute, int second) {
-    calendar = DateTime(year, month - 1, day, hour, minute, second);
+    calendar = DateTime(year, month, day, hour, minute, second);
     this.year = year;
     this.month = month;
     this.day = day;
@@ -65,7 +65,7 @@ class Solar {
   Solar([DateTime date]) {
     calendar = date ?? DateTime.now();
     year = calendar.year;
-    month = calendar.month + 1;
+    month = calendar.month;
     day = calendar.day;
     hour = calendar.hour;
     minute = calendar.minute;
@@ -118,10 +118,10 @@ class Solar {
     f *= 60;
     double s = int2(f);
 
-    calendar = DateTime(
-        y as int, (m - 1) as int, d as int, h as int, mi as int, s as int);
+    calendar = DateTime(y.toInt(), (m - 1).toInt(), d.toInt(), h.toInt(),
+        mi.toInt(), s.toInt());
     year = calendar.year;
-    month = calendar.month + 1;
+    month = calendar.month;
     day = calendar.day;
     hour = calendar.hour;
     minute = calendar.minute;
@@ -438,7 +438,7 @@ class Solar {
    * @return 阳历日期
    */
   Solar next(int days) {
-    DateTime c = DateTime(year, month - 1, day, hour, minute, second);
+    DateTime c = DateTime(year, month, day, hour, minute, second);
     c.add(Duration(days: days));
     return new Solar(c);
   }

@@ -2226,7 +2226,7 @@ class LunarUtil {
       } else {
         d = 29;
         for (var i = 0; i < LEAP_MONTH_YEAR.length; i++) {
-          if (i == index) {
+          if (LEAP_MONTH_YEAR[i] == index) {
             d = 30;
             break;
           }
@@ -2235,6 +2235,37 @@ class LunarUtil {
     }
     return d;
   }
+
+  // var index = year - this.BASE_YEAR + this.BASE_INDEX;
+  //       var v = 0, l = 0, d = 30;
+  //       if (1 <= month && month <= 8) {
+  //         v = this.LUNAR_MONTH[2 * index];
+  //         l = month - 1;
+  //         if (((v >> l) & 0x01) === 1) {
+  //           d = 29;
+  //         }
+  //       } else if (9 <= month && month <= 12) {
+  //         v = this.LUNAR_MONTH[2 * index + 1];
+  //         l = month - 9;
+  //         if (((v >> l) & 0x01) === 1) {
+  //           d = 29;
+  //         }
+  //       } else {
+  //         v = this.LUNAR_MONTH[2 * index + 1];
+  //         v = (v >> 4) & 0x0F;
+  //         if (v !== Math.abs(month)) {
+  //           d = 0;
+  //         } else {
+  //           d = 29;
+  //           for (var i = 0; i < this.LEAP_MONTH_YEAR.length; i++) {
+  //             if (this.LEAP_MONTH_YEAR[i] === index) {
+  //               d = 30;
+  //               break;
+  //             }
+  //           }
+  //         }
+  //       }
+  //       return d;
 
 
   ///获取HH:mm时刻的地支序号，非法的时刻返回0
