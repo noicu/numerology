@@ -1,24 +1,14 @@
-// package com.nlf.calendar.util;
-
-// import com.nlf.calendar.Holiday;
-
-// import java.util.ArrayList;
-// import java.util.Collections;
-// import java.util.List;
-
 import 'package:numerology/tools/holiday.dart';
 
-/**
- * 法定节假日工具（自2001年12月29日起）
- *
- * @author 6tail
- */
+/// 法定节假日工具（自2001年12月29日起）
+///
+/// @author 6tail
 class HolidayUtil {
-  /** 数据段长度 */
+  /// 数据段长度
   static final int SIZE = 18;
-  /** 0 */
+  /// 0
   static final int ZERO = '0'.codeUnitAt(0);
-  /** 节假日名称（元旦0，春节1，清明2，劳动3，端午4，中秋5，国庆6，国庆中秋7，抗战胜利日8） */
+  /// 节假日名称（元旦0，春节1，清明2，劳动3，端午4，中秋5，国庆6，国庆中秋7，抗战胜利日8）
   static final List<String> NAMES = [
     "元旦节",
     "春节",
