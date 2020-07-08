@@ -1,12 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:numerology/tools/lunar.dart';
+import 'package:secret/secret.dart';
 // import 'package:numerology/utils/solar_util.dart';
 // import 'package:numerology/utils/lunar_util.dart';
 import 'package:numerology/view/style/theme.dart';
 import 'package:numerology/view/widgets/calendar/custom_calendar.dart';
-import 'package:numerology/view/widgets/calendar/utils/lunar_util.dart';
+// import 'package:numerology/view/widgets/calendar/utils/lunar_util.dart';
 import 'package:numerology/view/widgets/chassis.dart';
 import 'package:numerology/view/widgets/search_app_bar.dart';
 // import 'package:numerology/utils/lunar_util.dart';
@@ -104,7 +104,7 @@ class _MeinPageState extends State<MeinPage> {
               print(value);
               return Chassis(
                 leading: Text(
-                  '${LunarUtil.numToChineseMonth(selectText.value.lunar[1], selectText.value.lunar[3])}${LunarUtil.numToChinese(selectText.value.lunar[1], selectText.value.lunar[2], selectText.value.lunar[3])}',
+                  '${selectText.value}',
                   style: TextStyle(color: Themes.mainText),
                 ),
                 suffix: Text(
@@ -114,14 +114,14 @@ class _MeinPageState extends State<MeinPage> {
                 child: Container(
                   child: Row(
                     children: <Widget>[
-                      Text(
-                        '${LunarUtil.numToChineseMonth(selectText.value.lunar[1], selectText.value.lunar[3])}${LunarUtil.numToChinese(selectText.value.lunar[1], selectText.value.lunar[2], selectText.value.lunar[3])}',
-                        style: TextStyle(color: Themes.mainText),
-                      ),
-                      Text(
-                        '${LunarUtil.numToChineseMonth(selectText.value.lunar[1], selectText.value.lunar[3])}${LunarUtil.numToChinese(selectText.value.lunar[1], selectText.value.lunar[2], selectText.value.lunar[3])}',
-                        style: TextStyle(color: Themes.mainText),
-                      ),
+                      // Text(
+                      //   '${LunarUtil.numToChineseMonth(selectText.value.lunar[1], selectText.value.lunar[3])}${LunarUtil.numToChinese(selectText.value.lunar[1], selectText.value.lunar[2], selectText.value.lunar[3])}',
+                      //   style: TextStyle(color: Themes.mainText),
+                      // ),
+                      // Text(
+                      //   '${LunarUtil.numToChineseMonth(selectText.value.lunar[1], selectText.value.lunar[3])}${LunarUtil.numToChinese(selectText.value.lunar[1], selectText.value.lunar[2], selectText.value.lunar[3])}',
+                      //   style: TextStyle(color: Themes.mainText),
+                      // ),
                     ],
                   ),
                 ),

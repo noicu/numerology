@@ -471,6 +471,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.24.1"
+  secret:
+    dependency: "direct main"
+    description:
+      name: secret
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.4"
   shared_preferences:
     dependency: "direct main"
     description:
