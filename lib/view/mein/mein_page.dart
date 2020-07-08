@@ -23,6 +23,7 @@ class _MeinPageState extends State<MeinPage> {
   ValueNotifier<DateModel> selectText;
 
   CalendarController controller;
+  Lunar lunar = Lunar(DateTime.now());
 
   @override
   void initState() {
@@ -33,7 +34,7 @@ class _MeinPageState extends State<MeinPage> {
       // minYearMonth: now.month - 2,
       // maxYear: now.year,
       // maxYearMonth: now.month + 1,
-      selectDateModel: DateModel.fromDateTime(DateTime.now()),
+      selectDateModel: DateModel.fromDateTime(now),
       showMode: CalendarConstants.MODE_SHOW_MONTH_AND_WEEK,
     );
 
@@ -46,6 +47,9 @@ class _MeinPageState extends State<MeinPage> {
     controller.addOnCalendarSelectListener((dateModel) {
       //刷新选择的时间
       selectText.value = dateModel;
+      print(dateModel.year);
+      lunar = new Lunar.fromYmd(dateModel.lunar[0], dateModel.lunar[1], dateModel.lunar[2]);
+      print(lunar);
     });
 
     text = new ValueNotifier("${DateTime.now().year}年${DateTime.now().month}月");
@@ -104,7 +108,7 @@ class _MeinPageState extends State<MeinPage> {
               print(value);
               return Chassis(
                 leading: Text(
-                  '${selectText.value}',
+                  '$lunar',
                   style: TextStyle(color: Themes.mainText),
                 ),
                 suffix: Text(
@@ -112,16 +116,16 @@ class _MeinPageState extends State<MeinPage> {
                   style: TextStyle(color: Themes.mainText),
                 ),
                 child: Container(
-                  child: Row(
+                  child: Column(
                     children: <Widget>[
-                      // Text(
-                      //   '${LunarUtil.numToChineseMonth(selectText.value.lunar[1], selectText.value.lunar[3])}${LunarUtil.numToChinese(selectText.value.lunar[1], selectText.value.lunar[2], selectText.value.lunar[3])}',
-                      //   style: TextStyle(color: Themes.mainText),
-                      // ),
-                      // Text(
-                      //   '${LunarUtil.numToChineseMonth(selectText.value.lunar[1], selectText.value.lunar[3])}${LunarUtil.numToChinese(selectText.value.lunar[1], selectText.value.lunar[2], selectText.value.lunar[3])}',
-                      //   style: TextStyle(color: Themes.mainText),
-                      // ),
+                      Text(
+                        lunar.dayYi.join(','),
+                        style: TextStyle(color: Themes.mainText),
+                      ),
+                      Text(
+                        lunar.dayJi.join(','),
+                        style: TextStyle(color: Themes.mainText),
+                      ),
                     ],
                   ),
                 ),
@@ -191,10 +195,11 @@ class CustomStyleDayWidget extends BaseCustomDayWidget {
       ..text = new TextSpan(
         text: dateModel.lunarString,
         style: new TextStyle(
-            color: !isInRange
-                ? Colors.grey
-                : isWeekend ? Themes.red : Themes.secondary,
-            fontSize: 12),
+          color: !isInRange
+              ? Colors.grey
+              : isWeekend ? Themes.red : Themes.secondary,
+          fontSize: 12,
+        ),
       )
       ..textDirection = TextDirection.ltr
       ..textAlign = TextAlign.center;
@@ -215,15 +220,15 @@ class CustomStyleDayWidget extends BaseCustomDayWidget {
     // print(SolarUtil.getWeeksOfMonth(2020,7,1));
     // print(LunarUtils.YI_JI[0]);
     // print(LunarUtils.hex(9));
-    Lunar d = Lunar(DateTime.now());
+    // Lunar d = Lunar(DateTime.now());
     // pr('sad', d);
-    pr('公历', '${d.getSolar()}');
-    pr('农历',
-        '${d.getYearInChinese()}-${d.getMonthInChinese()}-${d.getDayInChinese()}');
-    pr('吉神宜趋', d.getDayJiShen());
-    pr('凶煞宜忌', d.getDayXiongSha());
+    // pr('公历', '${d.getSolar()}');
+    // pr('农历',
+    //     '${d.getYearInChinese()}-${d.getMonthInChinese()}-${d.getDayInChinese()}');
+    // pr('吉神宜趋', d.getDayJiShen());
+    // pr('凶煞宜忌', d.getDayXiongSha());
 
-    pr('宜', d.getDayYi());
+    // pr('宜', d.getDayYi());
     // pr('忌', d.getDayJi());
     // pr('节日', d.getFestivals());
     // pr('非正式节日', d.getOtherFestivals());

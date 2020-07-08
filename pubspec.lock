@@ -477,7 +477,7 @@ packages:
       name: secret
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.0.4"
+    version: "0.1.1"
   shared_preferences:
     dependency: "direct main"
     description:
