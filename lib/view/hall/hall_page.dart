@@ -38,9 +38,9 @@ class _HallPageState extends State<HallPage> {
               '热门资讯',
               style: TextStyle(color: Themes.mainText),
             ),
-            suffix: Text(
-              '更多',
-              style: TextStyle(color: Themes.mainText),
+            suffix: FlatButton(
+              child: Text("Open editor"),
+              onPressed: () => Navigator.of(context).pushNamed("/editor"),
             ),
           ),
           Expanded(
@@ -48,10 +48,10 @@ class _HallPageState extends State<HallPage> {
               physics: BouncingScrollPhysics(),
               itemCount: news.length,
               separatorBuilder: (c, i) => Divider(
-                      height: 10,
-                      thickness: 10,
-                      color: Themes.backgroundH,
-                    ),
+                height: 10,
+                thickness: 10,
+                color: Themes.backgroundH,
+              ),
               itemBuilder: (c, i) => news[i],
             ),
           ),

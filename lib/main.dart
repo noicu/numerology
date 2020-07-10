@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:numerology/view/forum/editor_page.dart';
+import 'package:numerology/view/forum/view_page.dart';
 import 'package:numerology/view/home/home_page.dart';
 
 void main() {
@@ -15,6 +17,9 @@ class App extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomePage(),
+      routes: {
+        "/editor": (context) => EditorPage(),
+      },
     );
   }
 }
