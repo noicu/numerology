@@ -45,7 +45,7 @@ class EditorPageState extends State<EditorPage> {
       ]),
       body: ZefyrScaffold(
         child: ZefyrEditor(
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.all(10),
           controller: _controller,
           focusNode: _focusNode,
         ),
