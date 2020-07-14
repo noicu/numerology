@@ -29,7 +29,8 @@ class _HallPageState extends State<HallPage> {
         color: Themes.mainText,
       ),
       backgroundColor: Themes.backgroundB,
-      body: Column(
+      body: ListView(
+        physics: BouncingScrollPhysics(),
         children: <Widget>[
           HallBanner(),
           HallModC(),
@@ -38,25 +39,45 @@ class _HallPageState extends State<HallPage> {
               '热门资讯',
               style: TextStyle(color: Themes.mainText),
             ),
-            suffix: FlatButton(
-              child: Text("Open editor"),
-              onPressed: () => Navigator.of(context).pushNamed("/editor"),
-            ),
-          ),
-          Expanded(
-            child: ListView.separated(
-              physics: BouncingScrollPhysics(),
-              itemCount: news.length,
-              separatorBuilder: (c, i) => Divider(
-                height: 10,
-                thickness: 10,
-                color: Themes.backgroundH,
+            suffix: InkWell(
+              child: Text(
+                "Open editor",
+                style: TextStyle(color: Themes.mainText),
               ),
-              itemBuilder: (c, i) => news[i],
+              onTap: () => Navigator.of(context).pushNamed("/editor"),
             ),
           ),
+          ...news.map((e) => e).toList(),
         ],
       ),
+      // body: Column(
+      //   children: <Widget>[
+      //     HallBanner(),
+      //     HallModC(),
+      //     Chassis(
+      //       leading: Text(
+      //         '热门资讯',
+      //         style: TextStyle(color: Themes.mainText),
+      //       ),
+      //       suffix: FlatButton(
+      //         child: Text("Open editor"),
+      //         onPressed: () => Navigator.of(context).pushNamed("/editor"),
+      //       ),
+      //     ),
+      //     Expanded(
+      //       child: ListView.separated(
+      //         physics: BouncingScrollPhysics(),
+      //         itemCount: news.length,
+      //         separatorBuilder: (c, i) => Divider(
+      //           height: 10,
+      //           thickness: 10,
+      //           color: Themes.backgroundH,
+      //         ),
+      //         itemBuilder: (c, i) => news[i],
+      //       ),
+      //     ),
+      //   ],
+      // ),
       floatingActionButton: Container(
         child: Image.asset('assets/tool_icon/q.png', width: 80, height: 150),
       ),

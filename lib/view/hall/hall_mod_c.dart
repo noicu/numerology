@@ -71,7 +71,7 @@ class _HallModCState extends State<HallModC> {
         // margin: EdgeInsets.only(right: 10, left: 10),
         child: Column(
           children: <Widget>[
-            Image.asset(icon, width: 70, height: 70),
+            Image.asset(icon, width: 50, height: 50),
             Text(
               name,
               style: TextStyle(color: Themes.mainText),
@@ -93,14 +93,14 @@ class _HallModCState extends State<HallModC> {
         style: TextStyle(color: Themes.mainText),
       ),
       child: Container(
-        height: 100,
+        height: 70,
         width: double.infinity,
         child: GridView(
           scrollDirection: Axis.horizontal,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 1,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
+            mainAxisSpacing: 0,
+            crossAxisSpacing: 5,
           ),
           children: mods.map((e) => _buildItem(e['name'], e['icon'])).toList(),
         ),

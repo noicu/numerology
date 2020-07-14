@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:numerology/view/forum/view_page.dart';
+import 'package:numerology/view/style/theme.dart';
 import 'package:quill_delta/quill_delta.dart';
 import 'package:zefyr/zefyr.dart';
 
@@ -31,18 +32,22 @@ class EditorPageState extends State<EditorPage> {
     // Note that the editor requires special `ZefyrScaffold` widget to be
     // one of its parents.
     return Scaffold(
-      appBar: AppBar(title: Text("Editor page"), actions: [
-        FlatButton(
-          child: Text("预览"),
-          onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => ViewPage(
-                document: _controller.document,
+      appBar: AppBar(
+        backgroundColor: Themes.backgroundH,
+        title: Text("Editor page"),
+        actions: [
+          FlatButton(
+            child: Text("预览"),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ViewPage(
+                  document: _controller.document,
+                ),
               ),
             ),
-          ),
-        )
-      ]),
+          )
+        ],
+      ),
       body: ZefyrScaffold(
         child: ZefyrEditor(
           padding: EdgeInsets.all(10),
