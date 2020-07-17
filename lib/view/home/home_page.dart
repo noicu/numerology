@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:numerology/view/forum/forum_page.dart';
+import 'package:numerology/view/ftf/ftf_page.dart';
 
 import 'package:numerology/view/hall/hall_page.dart';
 import 'package:numerology/view/mall/mall_page.dart';
@@ -17,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   List<Widget> _children = [
     HallPage(),
-    MallPage(),
+    FtfPage(),
     MallPage(),
     ForumPage(),
     MeinPage(),

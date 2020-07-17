@@ -45,7 +45,7 @@ class _HallPageState extends State<HallPage> {
                 "Open editor",
                 style: TextStyle(color: Themes.mainText),
               ),
-              onTap: () => Navigator.of(context).pushNamed("/editor"),
+              onTap: () => Navigator.of(context).pushNamed("editor"),
             ),
           ),
           ...news.map((e) => e).toList(),
@@ -62,7 +62,7 @@ class _HallPageState extends State<HallPage> {
       //       ),
       //       suffix: FlatButton(
       //         child: Text("Open editor"),
-      //         onPressed: () => Navigator.of(context).pushNamed("/editor"),
+      //         onPressed: () => Navigator.of(context).pushNamed("editor"),
       //       ),
       //     ),
       //     Expanded(

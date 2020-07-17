@@ -198,7 +198,7 @@ class _MallPageState extends State<ForumPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pushNamed("/editor"),
+        onPressed: () => Navigator.of(context).pushNamed("editor"),
         child: Icon(Icons.add, size: 40),
       ),
     );

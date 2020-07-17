@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:numerology/view/style/theme.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage({Key key}) : super(key: key);
+class FtfPage extends StatefulWidget {
+  FtfPage({Key key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _FtfPageState createState() => _FtfPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _FtfPageState extends State<FtfPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Themes.backgroundB,
       appBar: AppBar(
         backgroundColor: Themes.backgroundH,
-        title: Text('登录', style: TextStyle(color: Themes.mainText)),
       ),
     );
   }

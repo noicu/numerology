@@ -16,67 +16,67 @@ class _HallModCState extends State<HallModC> {
     {
       "name": '八字',
       "icon": 'assets/tool_icon/s.png',
-      "on": "/editor",
+      "on": "editor",
     },
     {
       "name": '解梦',
       "icon": 'assets/tool_icon/z.png',
-      "on": "/editor",
+      "on": "editor",
     },
     {
       "name": '黄历',
       "icon": 'assets/tool_icon/w.png',
-      "on": "/almanac",
+      "on": "almanac",
     },
     {
       "name": '风水',
       "icon": 'assets/tool_icon/l.png',
-      "on": "/editor",
+      "on": "editor",
     },
     {
       "name": '姻缘',
       "icon": 'assets/tool_icon/sz.png',
-      "on": "/editor",
+      "on": "editor",
     },
     {
       "name": '星座',
       "icon": 'assets/tool_icon/xz.png',
-      "on": "/editor",
+      "on": "editor",
     },
     {
       "name": '塔罗牌',
       "icon": 'assets/tool_icon/tlp.png',
-      "on": "/editor",
+      "on": "editor",
     },
     {
       "name": '姓名',
       "icon": 'assets/tool_icon/tlp.png',
-      "on": "/editor",
+      "on": "editor",
     },
     {
       "name": '相术',
       "icon": 'assets/tool_icon/tlp.png',
-      "on": "/editor",
+      "on": "editor",
     },
     {
       "name": '运势',
       "icon": 'assets/tool_icon/tlp.png',
-      "on": "/editor",
+      "on": "editor",
     },
     {
       "name": '生肖',
       "icon": 'assets/tool_icon/tlp.png',
-      "on": "/editor",
+      "on": "editor",
     },
     {
       "name": '周易',
       "icon": 'assets/tool_icon/tlp.png',
-      "on": "/editor",
+      "on": "editor",
     },
     {
       "name": '血型',
       "icon": 'assets/tool_icon/tlp.png',
-      "on": "/editor",
+      "on": "editor",
     },
   ];
 
