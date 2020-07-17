@@ -37,6 +37,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      resizeToAvoidBottomPadding: false,
       backgroundColor: Themes.backgroundB,
       body: _children[_currentIndex],
       bottomNavigationBar: BottomAppBar(

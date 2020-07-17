@@ -24,6 +24,7 @@ class _HallPageState extends State<HallPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: SearchAppBarWidget(
         backgroundColor: Themes.backgroundH,
         color: Themes.mainText,

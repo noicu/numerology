@@ -16,68 +16,84 @@ class _HallModCState extends State<HallModC> {
     {
       "name": '八字',
       "icon": 'assets/tool_icon/s.png',
+      "on": "/editor",
     },
     {
       "name": '解梦',
       "icon": 'assets/tool_icon/z.png',
+      "on": "/editor",
     },
     {
       "name": '黄历',
       "icon": 'assets/tool_icon/w.png',
+      "on": "/almanac",
     },
     {
       "name": '风水',
       "icon": 'assets/tool_icon/l.png',
+      "on": "/editor",
     },
     {
       "name": '姻缘',
       "icon": 'assets/tool_icon/sz.png',
+      "on": "/editor",
     },
     {
       "name": '星座',
       "icon": 'assets/tool_icon/xz.png',
+      "on": "/editor",
     },
     {
       "name": '塔罗牌',
       "icon": 'assets/tool_icon/tlp.png',
+      "on": "/editor",
     },
     {
       "name": '姓名',
       "icon": 'assets/tool_icon/tlp.png',
+      "on": "/editor",
     },
     {
       "name": '相术',
       "icon": 'assets/tool_icon/tlp.png',
+      "on": "/editor",
     },
     {
       "name": '运势',
       "icon": 'assets/tool_icon/tlp.png',
+      "on": "/editor",
     },
     {
       "name": '生肖',
       "icon": 'assets/tool_icon/tlp.png',
+      "on": "/editor",
     },
     {
       "name": '周易',
       "icon": 'assets/tool_icon/tlp.png',
+      "on": "/editor",
     },
     {
       "name": '血型',
       "icon": 'assets/tool_icon/tlp.png',
+      "on": "/editor",
     },
   ];
 
-  Widget _buildItem(String name, String icon) => Container(
-        // margin: EdgeInsets.only(right: 10, left: 10),
-        child: Column(
-          children: <Widget>[
-            Image.asset(icon, width: 50, height: 50),
-            Text(
-              name,
-              style: TextStyle(color: Themes.mainText),
-            ),
-          ],
+  Widget _buildItem(it) => InkWell(
+        child: Container(
+          // margin: EdgeInsets.only(right: 10, left: 10),
+          child: Column(
+            children: <Widget>[
+              Image.asset(it['icon'], width: 50, height: 50),
+              Text(
+                "${it['name']}",
+                style: TextStyle(color: Themes.mainText),
+              ),
+            ],
+          ),
         ),
+        onTap: () => Navigator.of(context).pushNamed(it['on']),
       );
 
   @override
@@ -102,7 +118,7 @@ class _HallModCState extends State<HallModC> {
             mainAxisSpacing: 0,
             crossAxisSpacing: 5,
           ),
-          children: mods.map((e) => _buildItem(e['name'], e['icon'])).toList(),
+          children: mods.map((e) => _buildItem(e)).toList(),
         ),
       ),
     );
