@@ -80,7 +80,7 @@ class _HallPageState extends State<HallPage> {
       //   ],
       // ),
       floatingActionButton: Container(
-        child: Image.asset('assets/tool_icon/q.png', width: 80, height: 150),
+        child: Image.asset('assets/tool_icon/q.png', width: 50, height: 100),
       ),
       // floatingActionButtonAnimator: ,
     );
