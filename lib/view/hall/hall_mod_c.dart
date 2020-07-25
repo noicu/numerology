@@ -113,11 +113,11 @@ class _HallModCState extends State<HallModC> {
         width: double.infinity,
         decoration: BoxDecoration(
           // border: Border(top: BorderSide(style: BorderStyle())),
-          image: DecorationImage(
-            image:
-                NetworkImage('https://avatar.csdn.net/8/9/A/3_chenlove1.jpg'),
-            fit: BoxFit.none,
-          ),
+          // image: DecorationImage(
+          //   image:
+          //       NetworkImage('https://avatar.csdn.net/8/9/A/3_chenlove1.jpg'),
+          //   fit: BoxFit.none,
+          // ),
         ),
         child: GridView(
           scrollDirection: Axis.horizontal,

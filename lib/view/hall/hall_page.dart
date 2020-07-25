@@ -42,7 +42,7 @@ class _HallPageState extends State<HallPage> {
             ),
             suffix: InkWell(
               child: Text(
-                "Open editor",
+                "更多",
                 style: TextStyle(color: Themes.mainText),
               ),
               onTap: () => Navigator.of(context).pushNamed("editor"),

@@ -26,7 +26,7 @@ class NewsItem extends StatelessWidget {
                           color: Themes.mainText,
                         ),
                         Text(
-                          'asdasd',
+                          '爱情不得志的八字特征',
                           style: TextStyle(
                             color: Themes.mainText,
                           ),
@@ -34,7 +34,7 @@ class NewsItem extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      'asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd',
+                      '古往今来，爱情是人类永恒的话题。每一个心智正常的人都希望自己能够拥有美好和谐的爱情以及平顺的感情生活',
                       style: TextStyle(
                         color: Themes.mainText,
                       ),
@@ -79,14 +79,14 @@ class NewsItem extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      '123',
+                      '',
                       style: TextStyle(
                         fontSize: 12,
                         color: Themes.mainText,
                       ),
                     ),
                     Text(
-                      '321',
+                      '',
                       style: TextStyle(
                         fontSize: 12,
                         color: Themes.mainText,
