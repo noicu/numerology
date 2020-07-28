@@ -19,6 +19,7 @@ dependencies:
   zefyr: ^0.11.0
   json_annotation: ^3.0.1
   flutter_staggered_grid_view: ^0.3.0
+  fluwx: ^2.2.0 # 微信分享 https://www.jianshu.com/p/8f4b32aa89bf
 #---------------------------------
 dev_dependencies:
   flutter_test:

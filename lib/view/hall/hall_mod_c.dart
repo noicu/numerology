@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:fluwx/fluwx.dart';
 import 'package:flutter/material.dart';
 import 'package:numerology/view/style/theme.dart';
 import 'package:numerology/view/widgets/chassis.dart';
@@ -104,21 +104,26 @@ class _HallModCState extends State<HallModC> {
         '热门功能',
         style: TextStyle(color: Themes.mainText),
       ),
-      suffix: Text(
-        '更多',
-        style: TextStyle(color: Themes.mainText),
+      suffix: InkWell(
+        child: Text(
+          "更多",
+          style: TextStyle(color: Themes.mainText),
+        ),
+        onTap: () {
+          shareToWeChat(WeChatShareTextModel("source text", scene: WeChatScene.SESSION));
+        },
       ),
       child: Container(
         height: 70,
         width: double.infinity,
         decoration: BoxDecoration(
-          // border: Border(top: BorderSide(style: BorderStyle())),
-          // image: DecorationImage(
-          //   image:
-          //       NetworkImage('https://avatar.csdn.net/8/9/A/3_chenlove1.jpg'),
-          //   fit: BoxFit.none,
-          // ),
-        ),
+            // border: Border(top: BorderSide(style: BorderStyle())),
+            // image: DecorationImage(
+            //   image:
+            //       NetworkImage('https://avatar.csdn.net/8/9/A/3_chenlove1.jpg'),
+            //   fit: BoxFit.none,
+            // ),
+            ),
         child: GridView(
           scrollDirection: Axis.horizontal,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
